@@ -15,7 +15,7 @@
 		 $aColumns = array('codigo_producto', 'nombre_producto');//Columnas de busqueda
 		 $sTable = "factura_detalle";
 		
-		 $sWhere = "WHERE VDOCUMA = ".$_SESSION['codigo_factura'];
+		 $sWhere = "WHERE CLICODIGO = '".$_SESSION['codigo_usuario']."'";
 		if ( $_GET['q'] != "" )
 		{
 			$sWhere = "WHERE (";
@@ -29,10 +29,11 @@
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page = 5; //how much records you want to show
+		$per_page = 50; //how much records you want to show
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
+		
 		$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];

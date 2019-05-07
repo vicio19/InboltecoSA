@@ -8,8 +8,6 @@ function myFunction(val) {
 <?php
 
 
-if($_GET['optradio']=='1')
-{
 
 
 if (empty($_SESSION['username']) && empty($_SESSION['password'])){
@@ -17,36 +15,19 @@ if (empty($_SESSION['username']) && empty($_SESSION['password'])){
 }
 
 else {
-    if ($_GET['act']=='insert') {
-        if (isset($_GET['Guardar'])) {
-            
-           
-            $created_user    = $_SESSION['id_user'];
-			$fecha         = mysqli_real_escape_string($mysqli, trim($_GET['fecha_a']));
-            $exp             = explode('-',$fecha);
-            
-            
-            $codigo_nota_entrega       = mysqli_real_escape_string($mysqli, trim($_GET['codigo_transaccion']));
-            $codigo_usuario   = mysqli_real_escape_string($mysqli, trim($_GET['codigo_user']));
-			$fecha_ingreso_nota   = $exp[2]."-".$exp[1]."-".$exp[0];
-            $radioB   = mysqli_real_escape_string($mysqli, trim($_GET['optradio']));
-			
-		if($radioB=='1')
-			{
-				$codigo_factura= mysqli_real_escape_string($mysqli, trim($_GET['codigo_factura']));
-				$_SESSION['codigo_factura']  = $codigo_factura;
-			}
+   
+     
 			?>
 			
 			
 
   <section class="content-header">
     <h1>
-      <i class="fa fa-edit icon-title"></i> Generar Nota de Entrega
+      <i class="fa fa-edit icon-title"></i> Generar Factura
     </h1>
     <ol class="breadcrumb">
       <li><a href="?module=start"><i class="fa fa-home"></i> Inicio </a></li>
-      <li><a href="?module=notas_de_entrega"> Notas de entrega </a></li>
+      <li><a href="?module=facturas"> Lista Facturas </a></li>
       <li class="active"> Agregar </li>
     </ol>
   </section>
@@ -71,11 +52,7 @@ else {
 
 	           		<div class="panel panel-default">
 
-	  					<div class="panel-heading">
-
-	    					<h3 class="panel-title text-center">Hoja de pendientes de entrega<h3>
-
-	  					</div>
+	  					
 
 	        	
 
@@ -101,18 +78,18 @@ else {
 
 				                    <div class="form-group col-md-3">
 
-				                        <label>Nº de orden <span class="text-danger"></span></label>
+				                        <label>Nº Factura <span class="text-danger"></span></label>
 
-									      	<input type="text" class="form-control" value=" <?php echo $codigo_nota_entrega; ?>" id="codigo_nota" name="codigo_nota" readonly>					      
+									      	<input type="number" class="form-control" value="" id="nro_factura" name="nro_factura" min="0">					      
 
 
 
 				                    </div>
 									<div class="form-group col-md-3">
 
-				                        <label>Código de Cliente <span class="text-danger"></span></label>
+				                        <label>Caja <span class="text-danger"></span></label>
 
-									      	<input type="text" class="form-control" value=" <?php echo $codigo_usuario; ?>" id="codigo_cliente" name="codigo_cliente" readonly>					      
+									      	<input type="number" class="form-control" value=" " id="caja_id" name="caja_id" min="0">					      
 
 
 
@@ -121,7 +98,7 @@ else {
 
 				                        <label>Almacen <span class="text-danger"></span></label>
 
-									      	<input type="text" class="form-control" value=" " id="codigo_almacen" name="codigo_almacen" readonly>					      
+									      	<input type="number" class="form-control" value=" " id="codigo_almacen" name="codigo_almacen" min="0">				      
 
 
 
@@ -131,25 +108,24 @@ else {
 				                </div>   
 
 
-								<?php
 								
-								
-								 $query_id = mysqli_query($mysqli2, "SELECT CLINOMBRES, CLIRUC, CLITELEFONO FROM clientes where CLICODIGO='".$codigo_usuario."'")
-                                                or die('Error : '.mysqli_error($mysqli2));
-												  $data = mysqli_fetch_assoc($query_id);
-												  
-											  
-								
-								?>
 				            <div class="col-md-12">
 
 				  					<div class="form-row">
+										
+										 <div class="form-group col-md-4">
+
+									      	<label for="">Codigo Cliente</label>	
+
+									  			<input type="text" class="form-control" id="codigo_cliente" name="codigo_cliente" placeholder="COD CLIENTE" value="">					 	
+
+				    					</div>
 
 									    <div class=" form-group col-md-4">
 
 									     	<label for="">Nombre del cliente</label>
 
-									      	<input type="text" class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre del cliente" value="<?php echo $data['CLINOMBRES'] ?>" readonly>					      
+									      	<input type="text" class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre del cliente" value="" >					      
 
 									    </div>
 
@@ -157,43 +133,39 @@ else {
 
 									      	<label for="">NIT del Cliente</label>
 
-									      	<input type="text" class="form-control" name="dni" id="dni" placeholder="Documento de identidad" value="<?php echo $data['CLIRUC'] ?>" readonly>				      
+									      	<input type="text" class="form-control" name="nit_cliente" id="nit_cliente" placeholder="Nit" value="" >				      
 
 									    </div>
 
 
 
-									    <div class="form-group col-md-4">
+									   
 
-									      	<label for="">Teléfono de contacto</label>	
-
-									  			<input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese Teléfono" value="<?php echo $data['CLITELEFONO'] ?>" readonly>					 	
-
-				    					</div>
-
-										<?php
-										if($radioB=='1')
-										{
-										 $query_factur = mysqli_query($mysqli, "SELECT VDOCUMA, VCAJA, TOTALFAC FROM factura where 	VDOCUMA='".$codigo_factura."'")
-                                                or die('Error : '.mysqli_error($mysqli2));
-												  $data_factura = mysqli_fetch_assoc($query_factur);	
-										
-										
-										?>
+									
 
 				    					 <div class="form-group col-md-4">
 
-									     	<label for="">Numero Factura</label>
-
-									      	<input type="text" class="form-control" id="numero_factura" name="numero_factura" placeholder="Ingrese sucursal" value="<?php echo $data_factura['VDOCUMA'] ?>" readonly>								      
+									     	<label for="">Vendedor</label>
+                
+											  <select class="form-control" name="id_vendedor" id="id_vendedor" required>
+												<option value=""></option>
+												<option value="FABR001">FABRICA</option>
+												<option value="EVOC001">EJECUTIVO_VENTA_OCCIDENTE</option>
+												<option value="EVOR001">EJECUTIVO_VENTA_ORIENTE</option>
+											    <option value="EVIN001">EJECUTIVO_VENTA_INTERIOR</option>
+												<option value="EVPR001">EJECUTIVO_VENTA_PROVINCIA</option>
+												<option value="SUSC001">SUCURSAL SANTA CRUZ</option>
+																								
+											  </select>
+               							      
 
 									    </div>
 
 				    					 <div class="form-group col-md-4">
 
-									     	<label for="">Caja</label>
+									     	<label for="">Tipo de Cambio</label>
 
-									      	<input type="text" class="form-control" id="vcaja" name="vcaja" placeholder="Ingrese sucursal" value="<?php echo $data_factura['VCAJA'] ?>">					      
+									      	<input type="text" class="form-control" id="tipo_cambio" name="tipo_cambio" placeholder="Tipo de cambio" value="6.96">					      
 
 									    </div>
 
@@ -201,11 +173,13 @@ else {
 
 									      	<label for="">Total Factura</label>
 
-									      	<input type="text" class="form-control" id="total_factura" name="total_factura" placeholder="Ingrese Marca"  value="<?php echo number_format($data_factura['TOTALFAC'],2) ?> " readonly>						      
+									      	<input type="number" class="form-control" id="total_factura" name="total_factura" placeholder="Monto total bs"  min="0" value="">						      
 
 									    </div>
 
-									    <?php } ?>
+									    
+										
+
 
 				    					
 
@@ -273,14 +247,25 @@ else {
 				</div>
 			  </div>
 			</div>
-			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			 <script src="assets/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
 	<script type="text/javascript" src="assets/js/VentanaCentrada.js"></script>
 				<script>
 		$(document).ready(function(){
 			load(1);
+			 $("#codigo_cliente").autocomplete({
+                source: "modules/crear_facturas/clientes.php",
+                minLength: 2,
+                select: function(event, ui) {
+					event.preventDefault();
+                    $('#codigo_cliente').val(ui.item.codigo);
+					$('#nombre_cliente').val(ui.item.descripcion);
+					$('#nit_cliente').val(ui.item.precio);
+					$('#id_producto').val(ui.item.id_producto);
+			     }
+            });
 		});
 
 		function load(page){
@@ -411,7 +396,8 @@ else {
 			
 			</form>	      	
 			
-            
+             
+
            
 
           
@@ -424,23 +410,8 @@ else {
                 }  */
 				
             
-        }   
-    }
+
+    
 }  
-}else
-{
-			$created_user    = $_SESSION['id_user'];
-			$fecha         = mysqli_real_escape_string($mysqli, trim($_GET['fecha_a']));
-            $exp             = explode('-',$fecha);
-            
-            
-            $codigo_nota_entrega       = mysqli_real_escape_string($mysqli, trim($_GET['codigo_transaccion']));
-            $codigo_usuario   = mysqli_real_escape_string($mysqli, trim($_GET['codigo_user']));
-			$fecha_ingreso_nota   = $exp[2]."-".$exp[1]."-".$exp[0];
-            
 	
-	
-			header("location:main.php?module=nota_de_entrega_multi_fac&cod_nota_entrega=$codigo_nota_entrega&cod_user=$codigo_usuario&fecha_nota=$fecha_ingreso_nota");
-	
-}	
 ?>

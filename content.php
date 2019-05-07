@@ -32,14 +32,17 @@ else {
 	elseif ($_GET['module'] == 'notas_de_entrega_proses') {
 		include "modules/notas_de_entrega/proses.php";
 	}
+	elseif ($_GET['module'] == 'nota_de_entrega_multi_fac') {
+		include "modules/nota_de_entrega_multi_fac/proses.php";
+	}
 	
 
 	elseif ($_GET['module'] == 'stock_inventory') {
 		include "modules/stock_inventory/view.php";
 	}
 
-	elseif ($_GET['module'] == 'stock_report') {
-		include "modules/stock_report/view.php";
+	elseif ($_GET['module'] == 'crear_facturas') {
+		include "modules/crear_facturas/proses.php";
 	}
 
 	elseif ($_GET['module'] == 'user') {

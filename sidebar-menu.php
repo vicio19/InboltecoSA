@@ -54,20 +54,20 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
           	</a>
       		<ul class="treeview-menu">
         		<li class="active"><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos </a></li>
-        		<li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos</a></li>
+        		<li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos</a></li>
       		</ul>
     	</li>
     <?php
 	}
 
-	elseif ($_GET["module"]=="stock_report") { ?>
+	elseif ($_GET["module"]=="crear_facturas") { ?>
 		<li class="active treeview">
           	<a href="javascript:void(0);">
             	<i class="fa fa-file-text"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
           	</a>
       		<ul class="treeview-menu">
         		<li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Facturas Completadas </a></li>
-        		<li class="active"><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Notas de Entrega </a></li>
+        		<li class="active"><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Notas de Entrega </a></li>
       		</ul>
     	</li>
     <?php
@@ -80,7 +80,7 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
           	</a>
       		<ul class="treeview-menu">
         		<li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Facturas Completadas </a></li>
-        		<li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Notas de Entrega </a></li>
+        		<li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Notas de Entrega </a></li>
       		</ul>
     	</li>
     <?php
@@ -94,7 +94,7 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
           	</a>
       		<ul class="treeview-menu">
         		<li class="active"><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Importar Facturas </a></li>
-        		<li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registrar Facturas</a></li>
+        		<li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registrar Facturas</a></li>
       		</ul>
     	</li>
     <?php
@@ -108,7 +108,7 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
           	</a>
       		<ul class="treeview-menu">
         		<li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Facturas completas </a></li>
-        		<li class="active"><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Notas de Pedido </a></li>
+        		<li class="active"><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Notas de Pedido </a></li>
       		</ul>
     	</li>
     <?php
@@ -122,7 +122,7 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
           	</a>
       		<ul class="treeview-menu">
         		<li><a href="?module=importar_fac"><i class="fa fa-circle-o"></i> Importar Facturas </a></li>
-        		<li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registrar Factura </a></li>
+        		<li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registrar Factura </a></li>
       		</ul>
     	</li>
     <?php
@@ -193,19 +193,19 @@ elseif ($_SESSION['permisos_acceso']=='Gerente') { ?>
             </a>
           <ul class="treeview-menu">
             <li class="active"><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos</a></li>
-            <li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php
   }
-  elseif ($_GET["module"]=="stock_report") { ?>
+  elseif ($_GET["module"]=="crear_facturas") { ?>
     <li class="active treeview">
             <a href="javascript:void(0);">
               <i class="fa fa-file-text"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
           <ul class="treeview-menu">
             <li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos </a></li>
-            <li class="active"><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li class="active"><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php
@@ -217,7 +217,7 @@ elseif ($_SESSION['permisos_acceso']=='Gerente') { ?>
             </a>
           <ul class="treeview-menu">
             <li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i>  Stock de Medicamentos </a></li>
-            <li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php
@@ -293,19 +293,19 @@ if ($_SESSION['permisos_acceso']=='Almacen') { ?>
             </a>
           <ul class="treeview-menu">
             <li class="active"><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos </a></li>
-            <li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php
   }
-  elseif ($_GET["module"]=="stock_report") { ?>
+  elseif ($_GET["module"]=="crear_facturas") { ?>
     <li class="active treeview">
             <a href="javascript:void(0);">
               <i class="fa fa-file-text"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
           <ul class="treeview-menu">
             <li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos </a></li>
-            <li class="active"><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li class="active"><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php
@@ -317,7 +317,7 @@ if ($_SESSION['permisos_acceso']=='Almacen') { ?>
             </a>
           <ul class="treeview-menu">
             <li><a href="?module=stock_inventory"><i class="fa fa-circle-o"></i> Stock de Medicamentos </a></li>
-            <li><a href="?module=stock_report"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
+            <li><a href="?module=crear_facturas"><i class="fa fa-circle-o"></i> Registro de medicamentos </a></li>
           </ul>
       </li>
     <?php

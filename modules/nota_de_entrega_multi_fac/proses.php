@@ -8,34 +8,25 @@ function myFunction(val) {
 <?php
 
 
-if($_GET['optradio']=='1')
-{
-
-
 if (empty($_SESSION['username']) && empty($_SESSION['password'])){
     echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 
 else {
-    if ($_GET['act']=='insert') {
-        if (isset($_GET['Guardar'])) {
-            
+   
+           
+		   unset($_SESSION['codigo_factura']);  
            
             $created_user    = $_SESSION['id_user'];
-			$fecha         = mysqli_real_escape_string($mysqli, trim($_GET['fecha_a']));
+			$fecha         = mysqli_real_escape_string($mysqli, trim($_GET['fecha_nota']));
             $exp             = explode('-',$fecha);
             
             
-            $codigo_nota_entrega       = mysqli_real_escape_string($mysqli, trim($_GET['codigo_transaccion']));
-            $codigo_usuario   = mysqli_real_escape_string($mysqli, trim($_GET['codigo_user']));
+            $codigo_nota_entrega       = mysqli_real_escape_string($mysqli, trim($_GET['cod_nota_entrega']));
+            $codigo_usuario   = mysqli_real_escape_string($mysqli, trim($_GET['cod_user']));
 			$fecha_ingreso_nota   = $exp[2]."-".$exp[1]."-".$exp[0];
-            $radioB   = mysqli_real_escape_string($mysqli, trim($_GET['optradio']));
+            $_SESSION['codigo_usuario']=$codigo_usuario;
 			
-		if($radioB=='1')
-			{
-				$codigo_factura= mysqli_real_escape_string($mysqli, trim($_GET['codigo_factura']));
-				$_SESSION['codigo_factura']  = $codigo_factura;
-			}
 			?>
 			
 			
@@ -52,7 +43,7 @@ else {
   </section>
 
   <!-- Main content -->
-   <form role="form" class="form-horizontal" action="modules/notas_de_entrega/guardar_nota_entrega.php?act=insert" method="POST" name="formObatMasuk">
+   <form role="form" class="form-horizontal" action="modules/nota_de_entrega_multi_fac/guardar_nota_entrega.php?act=insert" method="POST" name="formObatMasuk">
   <section class="content">
     <div class="row">
       <div class="col-md-12">
@@ -171,41 +162,7 @@ else {
 
 				    					</div>
 
-										<?php
-										if($radioB=='1')
-										{
-										 $query_factur = mysqli_query($mysqli, "SELECT VDOCUMA, VCAJA, TOTALFAC FROM factura where 	VDOCUMA='".$codigo_factura."'")
-                                                or die('Error : '.mysqli_error($mysqli2));
-												  $data_factura = mysqli_fetch_assoc($query_factur);	
 										
-										
-										?>
-
-				    					 <div class="form-group col-md-4">
-
-									     	<label for="">Numero Factura</label>
-
-									      	<input type="text" class="form-control" id="numero_factura" name="numero_factura" placeholder="Ingrese sucursal" value="<?php echo $data_factura['VDOCUMA'] ?>" readonly>								      
-
-									    </div>
-
-				    					 <div class="form-group col-md-4">
-
-									     	<label for="">Caja</label>
-
-									      	<input type="text" class="form-control" id="vcaja" name="vcaja" placeholder="Ingrese sucursal" value="<?php echo $data_factura['VCAJA'] ?>">					      
-
-									    </div>
-
-									    <div class="form-group col-md-4">
-
-									      	<label for="">Total Factura</label>
-
-									      	<input type="text" class="form-control" id="total_factura" name="total_factura" placeholder="Ingrese Marca"  value="<?php echo number_format($data_factura['TOTALFAC'],2) ?> " readonly>						      
-
-									    </div>
-
-									    <?php } ?>
 
 				    					
 
@@ -287,7 +244,7 @@ else {
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
 			$.ajax({
-				url:'./modules/notas_de_entrega/productos_cotizacion.php?action=ajax&page='+page+'&q='+q,
+				url:'./modules/nota_de_entrega_multi_fac/productos_cotizacion.php?action=ajax&page='+page+'&q='+q,
 				 beforeSend: function(objeto){
 				 $('#loader').html('<img src="./assets/img/ajax-loader.gif"> Cargando...');
 			  },
@@ -338,7 +295,7 @@ else {
 			
 			$.ajax({
         type: "POST",
-        url: "modules/notas_de_entrega/agregar_cotizador.php",
+        url: "modules/nota_de_entrega_multi_fac/agregar_cotizador.php",
         data: "id="+id+"&precio_venta="+precio_venta+"&cantidad="+cantidad+"&vdocuma="+vdocuma+"&codigo_pro="+codigo_pro+"&cant_total="+cant_total,
 		 beforeSend: function(objeto){
 			$("#resultados").html("Mensaje: Cargando...");
@@ -355,7 +312,7 @@ else {
 			
 			$.ajax({
         type: "GET",
-        url: "modules/notas_de_entrega/agregar_cotizador.php",
+        url: "modules/nota_de_entrega_multi_fac/agregar_cotizador.php",
         data: "id="+id,
 		 beforeSend: function(objeto){
 			$("#resultados").html("Mensaje: Cargando...");
@@ -424,23 +381,7 @@ else {
                 }  */
 				
             
-        }   
-    }
+      
 }  
-}else
-{
-			$created_user    = $_SESSION['id_user'];
-			$fecha         = mysqli_real_escape_string($mysqli, trim($_GET['fecha_a']));
-            $exp             = explode('-',$fecha);
-            
-            
-            $codigo_nota_entrega       = mysqli_real_escape_string($mysqli, trim($_GET['codigo_transaccion']));
-            $codigo_usuario   = mysqli_real_escape_string($mysqli, trim($_GET['codigo_user']));
-			$fecha_ingreso_nota   = $exp[2]."-".$exp[1]."-".$exp[0];
-            
 	
-	
-			header("location:main.php?module=nota_de_entrega_multi_fac&cod_nota_entrega=$codigo_nota_entrega&cod_user=$codigo_usuario&fecha_nota=$fecha_ingreso_nota");
-	
-}	
 ?>
